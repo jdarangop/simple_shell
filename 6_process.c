@@ -6,8 +6,7 @@
   */
 int _launch(char **args)
 {
-	pid_t pid;
-	int status;
+	int status, pid;
 	int flag = 0;
 
 	args = _check_path(args, &flag);
