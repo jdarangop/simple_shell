@@ -14,6 +14,7 @@ void _loop(void)
 	if (isatty(STDIN_FILENO) != 1)
 		inter = 0;
 
+	signal(SIGINT, sigint_handler);
 
 	do {
 		if (inter != 0)

@@ -18,6 +18,7 @@ char *_read_line(void);
 char **_split_line(char *line);
 int _execute(char **args, char *input);
 int _launch(char **args);
+void sigint_handler(int sig);
 
 /* Function declarations (prototypes for for builtin shell commands */
 int hsh_exit(char **args, char *input);
