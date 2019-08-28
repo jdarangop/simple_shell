@@ -9,7 +9,8 @@
 int (*builtin_func[])(char **args, char *input) = {
 	&_cd,
 	&_help,
-	&hsh_exit
+	&hsh_exit,
+	&_env
 };
 
 /**
@@ -20,7 +21,7 @@ int (*builtin_func[])(char **args, char *input) = {
   */
 int _execute(char **args, char *input)
 {
-	char *builtin_str[] = {"cd", "help", "exit"};
+	char *builtin_str[] = {"cd", "help", "exit", "env"};
 	int i;
 
 	if (args[0] == NULL)
@@ -29,7 +30,7 @@ int _execute(char **args, char *input)
 	/*if (_strcmp(args[0], "cd") == 0)*/
 		/*return (_cd(args));*/
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if (_strcmp(args[0], builtin_str[i]) == 0)
 			return ((*builtin_func[i])(args, input));

@@ -30,7 +30,15 @@ int _cd(char **args, __attribute__((unused)) char *input);
   */
 int _help(__attribute__((unused)) char **args,
 		__attribute__((unused)) char *input);
-/* int _env(char **args); */
+
+/**
+  * _env - Env function
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: 1 if works.
+  */
+int _env(__attribute__((unused)) char **args,
+	__attribute__((unused)) char *input);
 
 /* Function declarations (prototypes) for auxiliary funtions */
 ssize_t _getline(char **b, size_t *bufsize, FILE *stream);
