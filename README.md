@@ -234,5 +234,5 @@ $ exit
 
 ## License
 
-
+The MIT License
 

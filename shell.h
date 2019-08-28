@@ -40,6 +40,7 @@ int _help(__attribute__((unused)) char **args,
   */
 int _env(__attribute__((unused)) char **args,
 	__attribute__((unused)) char *input);
+int _setenv(char *name, char *value);
 
 /* Function declarations (prototypes) for auxiliary funtions */
 ssize_t _getline(char **b, size_t *bufsize, FILE *stream);

@@ -8,9 +8,29 @@
   */
 int _cd(char **args, __attribute__((unused)) char *input)
 {
+	char *home = NULL, *old_pwd, current_pwd[1024];
+
 	if (args[1] == NULL)
 	{
-		perror("hsh: expected argument to \"cd\"\n");
+		home = _getenv("HOME");
+		if (chdir((const char *)home) != 0)
+			perror("hsh:");
+		else
+		{
+			_setenv("OLDPWD", _getenv("PWD"));
+			_setenv("PWD", home);
+		}
+	}
+	else if (_strcmp(args[1], "-") == 0)
+	{
+		old_pwd = _getenv("OLDPWD");
+		if (chdir(old_pwd) != 0)
+			perror("hsh:");
+		else
+		{
+			_setenv("OLDPWD", _getenv("PWD"));
+			_setenv("PWD", old_pwd);
+		}
 	}
 	else
 	{
@@ -18,9 +38,19 @@ int _cd(char **args, __attribute__((unused)) char *input)
 		{
 			perror("hsh:");
 		}
+		else
+		{
+			if (getcwd(current_pwd, sizeof(current_pwd)) == NULL)
+				perror("hsh:");
+
+			_setenv("OLDPWD", _getenv("PWD"));
+			_setenv("PWD", current_pwd);
+		}
 	}
 	return (1);
 }
+
+
 /**
   * _help - Display the help about a command.
   * @args: List of arguments passed from parsing.
@@ -100,5 +130,49 @@ int _env(__attribute__((unused)) char **args,
 		/*write(STDOUT_FILENO, "\n", 1);*/
 		i++;
 	}
+	return (1);
+}
+
+/**
+  * _setenv - Set a enrinment variable.
+  * @name:Name of the variable
+  * @value: Value in the variable.
+  * Return: 1 if works.
+  */
+int _setenv(char *name, char *value)
+{
+	char *tmp, new_variable[1024];
+	char **ep = environ;
+	char **ev;
+	int counter = 0, i;
+
+	if (value == NULL)
+		perror("hsh:");
+	tmp = _getenv(name);
+	if (tmp != NULL)
+	{
+		_strcpy(tmp, value);
+	}
+	else
+	{
+		while (ep[counter] != NULL)
+		{
+			counter++;
+		}
+		counter += 2;
+		ev = malloc(counter * sizeof(char *));
+		for (i = 0; ep[i] != NULL; i++)
+		{
+			ev[i] = ep[i];
+		}
+		_strcat(new_variable, name);
+		_strcat(new_variable, "=");
+		_strcat(new_variable, value);
+		ev[i] = new_variable;
+		ev[++i] = NULL;
+		environ = ev;
+		free(ep);
+	}
+
 	return (1);
 }
