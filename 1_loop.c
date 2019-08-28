@@ -38,7 +38,7 @@ void _loop(void)
 		}
 
 		/* Execute according to arguments. */
-		status = _execute(args);
+		status = _execute(args, input);
 
 		/* Free input and arguments. */
 		free(input);

@@ -16,13 +16,20 @@ extern char **environ;
 void _loop(void);
 char *_read_line(void);
 char **_split_line(char *line);
-int _execute(char **args);
+int _execute(char **args, char *input);
 int _launch(char **args);
 
 /* Function declarations (prototypes for for builtin shell commands */
-int hsh_exit(void);
-int _cd(char **args);
-int _help(void);
+int hsh_exit(char **args, char *input);
+int _cd(char **args, __attribute__((unused)) char *input);
+/**
+  * _help - Help function
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: 1 if works.
+  */
+int _help(__attribute__((unused)) char **args,
+		__attribute__((unused)) char *input);
 /* int _env(char **args); */
 
 /* Function declarations (prototypes) for auxiliary funtions */
@@ -48,6 +55,6 @@ char *_strcpy(char *dest, char *src);
 int _strncmp(const char *s1, const char *s2, size_t n);
 int _putchar(char c);
 void _puts(char *str);
-
+int _atoi(char *s);
 
 #endif
