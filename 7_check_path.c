@@ -55,7 +55,7 @@ char **_check_path(char **args, int *flag)
 	if (alloc_error2(dest_path) == -1)
 		return (NULL);
 	path = _getenv("PATH"); /*  Gets the path from the envi with the diff paths */
-	copy_line = malloc(1024 * sizeof(char *));
+	copy_line = malloc((_strlen(path) + 1) * sizeof(char *));
 	if (alloc_error1(copy_line, dest_path) == -1)
 		return (NULL);
 	tokens_path = _split_path(path, copy_line); /* Get array of ptr to pos paths*/
