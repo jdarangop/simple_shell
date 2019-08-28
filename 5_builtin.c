@@ -56,10 +56,12 @@ int _env(void)
 
 	while (*ep != NULL)
 	{
-		int len = _strlen(*ep);
+		/*int len = _strlen(*ep);*/
 
-		write(STDOUT_FILENO, *ep, len);
-		write(STDOUT_FILENO, "\n", 1);
+		_puts(*ep);
+		_puts("\n");
+		/*write(STDOUT_FILENO, *ep, len);*/
+		/*write(STDOUT_FILENO, "\n", 1);*/
 		ep++;
 	}
 	return (1);
