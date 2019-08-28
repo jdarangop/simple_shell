@@ -52,14 +52,13 @@ int hsh_exit(void)
   */
 int _env(void)
 {
-	char **ep = environ;
 	int i = 0;
 
-	while (ep[i] != 0)
+	while (environ[i] != 0)
 	{
 		/*int len = _strlen(*ep);*/
 
-		_puts(ep[i]);
+		_puts(environ[i]);
 		_puts("\n");
 		/*write(STDOUT_FILENO, *ep, len);*/
 		/*write(STDOUT_FILENO, "\n", 1);*/
