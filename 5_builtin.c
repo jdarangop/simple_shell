@@ -59,6 +59,7 @@ int _env(void)
 		int len = _strlen(*ep);
 
 		write(STDOUT_FILENO, *ep, len);
+		write(STDOUT_FILENO, "\n", 1);
 		ep++;
 	}
 	return (1);
