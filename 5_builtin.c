@@ -8,28 +8,12 @@
   */
 int _cd(char **args, __attribute__((unused)) char *input)
 {
-	char *home = NULL, *old_pwd, current_pwd[1024];
 
 	if (args[1] == NULL)
 	{
-		home = _getenv("HOME");
-		if (chdir((const char *)home) != 0)
-			perror("hsh:");
-		else
+		if (chdir(_getenv("HOME")) != 0)
 		{
-			_setenv("OLDPWD", _getenv("PWD"));
-			_setenv("PWD", home);
-		}
-	}
-	else if (_strcmp(args[1], "-") == 0)
-	{
-		old_pwd = _getenv("OLDPWD");
-		if (chdir(old_pwd) != 0)
 			perror("hsh:");
-		else
-		{
-			_setenv("OLDPWD", _getenv("PWD"));
-			_setenv("PWD", old_pwd);
 		}
 	}
 	else
@@ -37,14 +21,6 @@ int _cd(char **args, __attribute__((unused)) char *input)
 		if (chdir(args[1]) != 0)
 		{
 			perror("hsh:");
-		}
-		else
-		{
-			if (getcwd(current_pwd, sizeof(current_pwd)) == NULL)
-				perror("hsh:");
-
-			_setenv("OLDPWD", _getenv("PWD"));
-			_setenv("PWD", current_pwd);
 		}
 	}
 	return (1);
@@ -147,7 +123,9 @@ int _setenv(char *name, char *value)
 	int counter = 0, i;
 
 	if (value == NULL)
+	{
 		perror("hsh:");
+	}
 	tmp = _getenv(name);
 	if (tmp != NULL)
 	{
